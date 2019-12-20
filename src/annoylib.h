@@ -72,7 +72,7 @@ typedef signed __int64    int64_t;
   #define showUpdate(...) { __ERROR_PRINTER_OVERRIDE__( __VA_ARGS__ ); }
 #endif
 
-void set_error_from_errno(char **error, const char* msg) {
+inline void set_error_from_errno(char **error, const char* msg) {
   showUpdate("%s: %s (%d)\n", msg, strerror(errno), errno);
   if (error) {
     *error = (char *)malloc(256);  // TODO: win doesn't support snprintf
@@ -80,7 +80,7 @@ void set_error_from_errno(char **error, const char* msg) {
   }
 }
 
-void set_error_from_string(char **error, const char* msg) {
+inline void set_error_from_string(char **error, const char* msg) {
   showUpdate("%s\n", msg);
   if (error) {
     *error = (char *)malloc(strlen(msg) + 1);
